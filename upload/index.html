@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>图片上传</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="upload">
+        <div class="upload-add">
+            上传文件
+            <input id="upload" type="file"  multiple accept class="upload-add_input">
+        </div>
+        <div class="upload-main">
+            <div class="upload-title upload-row">
+                <div class="upload-col upload-col--medium upload--border">文件名</div>
+                <div class="upload-col upload-col--small upload--border">大小</div>
+                <div class="upload-col upload-col--large upload--border">地址</div>
+                <div class="upload-col upload-col--small"></div>
+            </div>
+            <div class="upload-list" id="upload-list">
+                
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js"></script>
+    <script type="text/html" id="uploadItem">
+    <div class="upload-item upload-row" data-clipboard-text="[url]">
+        <div class="upload-col upload-col--medium">[name]
+            </div>
+        <div class="upload-col upload-col--small">[size]</div>
+        <div class="upload-col upload-col--large">[url]</div>
+        <div class="upload-col upload-col--small">复制</div>
+    </div>
+    </script>
+    <script>
+        // var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); 
+        // var uploadList = document.querySelector('upload-list')
+        // var html = document.getElementById("uploadItem").innerHTML;
+        // var source = ''
+        // for (var i= 0;i< 10;i++) {
+        //     source += html.replace(reg, function(node, key) {    
+        //         return {    
+        //             'name' : 'o_1ddlgce5tjb11m4c1nlqa3h1ompe',   
+        //             'size' : '222kb',
+        //             'url': 'https://qnm.hunliji.com/o_1ddlgce5tjb11m4c1nlqa3h1ompead-col--large>https://qnm.hunliji.com/o_1ddlgce5tjb11m4c1nlqa3h1ompe.jpg'
+        //         }[key];    //key必须要，否则会报错哦
+        //     });    
+        // }
+        // $(".upload-list").append(source);
+//         var clipboard = new ClipboardJS('.btn');
+
+// clipboard.on('success', function(e) {
+//     console.info('Action:', e.action);
+//     console.info('Text:', e.text);
+//     console.info('Trigger:', e.trigger);
+
+//     e.clearSelection();
+// });
+    </script>
+</body>
+</html>

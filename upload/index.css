@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body,.upload{
+    height: 100%;
+    width: 100%;
+}
+
+.upload{
+    position: relative;
+    padding: 0 20px;
+}
+.upload-add{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width:400px;
+    height: 160px;
+    border: 3px dashed #aaa;
+    border-radius: 15px; 
+    line-height: 160px;
+    text-align: center;
+    font-size: 28px;
+    color: #666;
+    font-weight: bold;
+}
+
+.upload-add--top{
+    top: 18%;
+}
+
+.upload-add--top + .upload-main{
+    display: block;
+}
+.upload-add_input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+}
+
+.upload-main{
+    display: none;
+    height: 100%;
+    padding-top: 220px;
+    margin-right: -20px;
+}
+.upload-list{
+height: calc(100% - 30px);
+overflow-y: auto;
+}
+.upload-title .upload-col{
+    cursor: default;
+    padding-bottom: 4px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #000;
+}
+.upload-item .upload-col{
+    cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    color: #333;
+}
+.upload--border{
+    border-bottom: 1px solid #333;
+}
+.upload-row{
+    display: flex;
+    text-align: center
+}
+.upload-col{
+    margin-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.upload-col--small{
+    flex: 1
+}
+.upload-col--medium{
+    flex: 2
+}
+.upload-col--large{
+    flex: 3
+}
