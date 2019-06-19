@@ -28,38 +28,62 @@
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js"></script>
     <script type="text/html" id="uploadItem">
-    <div class="upload-item upload-row" data-clipboard-text="[url]">
+    <div class="upload-item upload-row" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="[url]">
         <div class="upload-col upload-col--medium">[name]
             </div>
-        <div class="upload-col upload-col--small">[size]</div>
+        <div class="upload-col upload-col--small">[size]kb</div>
         <div class="upload-col upload-col--large">[url]</div>
-        <div class="upload-col upload-col--small">复制</div>
+        <div class="upload-col upload-copy upload-col--small" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="[url]">双击复制</div>
     </div>
     </script>
     <script>
-        // var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); 
-        // var uploadList = document.querySelector('upload-list')
-        // var html = document.getElementById("uploadItem").innerHTML;
-        // var source = ''
-        // for (var i= 0;i< 10;i++) {
-        //     source += html.replace(reg, function(node, key) {    
-        //         return {    
-        //             'name' : 'o_1ddlgce5tjb11m4c1nlqa3h1ompe',   
-        //             'size' : '222kb',
-        //             'url': 'https://qnm.hunliji.com/o_1ddlgce5tjb11m4c1nlqa3h1ompead-col--large>https://qnm.hunliji.com/o_1ddlgce5tjb11m4c1nlqa3h1ompe.jpg'
-        //         }[key];    //key必须要，否则会报错哦
-        //     });    
-        // }
-        // $(".upload-list").append(source);
-//         var clipboard = new ClipboardJS('.btn');
+        
+        $('#upload').on('change', function () {
+            var file = this.files
+            for(var i =0; i<file.length; i++) {
+                var formData = new FormData()
+                formData.append('files', file[i])
+                upload(formData)
+            }
+        })
+        // 上传图片
+        function upload(formData) {
+            $.ajax({
+                url: 'https://laohuq.com/api/File/Uploads',
+                processData:false,
+                contentType: false,
+                method: 'post',
+                data: formData,
+                success: (res) => {
+                    console.log(res)
+                    appendElement(res.data)
+                }
+            })
+        }
+        // 将元素添加到DOM
+        function appendElement(files) {
+            if (!$('.upload-add').hasClass('upload-add--top')) {
+                $('.upload-add').addClass('upload-add--top')
+            }
+            var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); 
+            var uploadList = document.querySelector('upload-list')
+            var html = document.getElementById("uploadItem").innerHTML;
+            var source = html.replace(reg, function(node, key) {    
+                return {    
+                    'name' : files.fileName,   
+                    'size' : files.size,
+                    'url': files.filePath
+                }[key];    //key必须要，否则会报错哦
+            });    
+            $(".upload-list").append(source);
+        }
 
-// clipboard.on('success', function(e) {
-//     console.info('Action:', e.action);
-//     console.info('Text:', e.text);
-//     console.info('Trigger:', e.trigger);
-
-//     e.clearSelection();
-// });
+        // 复制url
+        $('.upload-list').on('click' ,'.upload-item', function () {
+            const copyTxt = $(this).attr('data-clipboard-text')
+            new ClipboardJS(document.querySelectorAll('.upload-item'))
+            new ClipboardJS(document.querySelectorAll('.upload-copy'))
+        })
     </script>
 </body>
 </html>
