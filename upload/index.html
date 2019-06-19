@@ -36,16 +36,10 @@
             </div>
         <div class="upload-col upload-col--small">[size]kb</div>
         <div class="upload-col upload-col--large">[url]</div>
-        <div class="upload-col upload-copy upload-col--small" data-clipboard-text="[url]">点击复制</div>
+        <div class="upload-col upload-copy upload-col--small">点击复制</div>
     </div>
     </script>
     <script>
-        appendElement({
-            fileName: 'test',
-            filePath: 'www.google.com',
-            size: 1
-        })
-        
         $('#upload').on('change', function () {
             var file = this.files
             for(var i =0; i<file.length; i++) {
@@ -63,7 +57,6 @@
                 method: 'post',
                 data: formData,
                 success: (res) => {
-                    console.log(res)
                     appendElement(res.data)
                 }
             })
@@ -89,23 +82,9 @@
         // 复制url
         var clipboard = new ClipboardJS('.upload-item');
         clipboard.on('success', function(e) {
-            // console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            // console.info('Trigger:', e.trigger);
             $('.upload-copy-msg').animate({top: '16%',opacity: 1,}).delay(1200).animate({top: '-23%',opacity: 0});
             e.clearSelection();
         });
-        clipboard.on('error', function(e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
-        });
-
-        // 复制url
-        // $('.upload-list').on('click' ,'.upload-item', function () {
-        //     var copyTxt = $(this).attr('data-clipboard-text')
-        //     new ClipboardJS(document.querySelectorAll('.upload-item'))
-        //     new ClipboardJS(document.querySelectorAll('.upload-copy'))
-        // })
     </script>
 </body>
 </html>
