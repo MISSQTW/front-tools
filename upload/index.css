@@ -74,6 +74,9 @@ html, body,.upload{
     font-weight: bolder;
     color: #000;
 }
+.upload-item:hover{
+    background-color: rgba(220, 220, 220, .2);
+}
 .upload-item .upload-col{
     cursor: pointer;
     height: 50px;
@@ -103,4 +106,17 @@ html, body,.upload{
 }
 .upload-col--large{
     flex: 4
+}
+.upload-copy-msg{
+    position: fixed;
+    top: -23%;
+    left: 50%;
+    opacity: 0;
+    z-index: 99;
+    color: #8ce6b0;
+    border-radius: 4px;
+    background-color: #fff;
+    padding: 8px 18px 8px 18px;
+    transform: translateX(-50%);
+    box-shadow: 0 1px 6px rgba(0,0,0,.2);
 }

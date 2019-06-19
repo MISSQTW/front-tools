@@ -24,19 +24,27 @@
                 
             </div>
         </div>
+        <div class="upload-copy-msg">
+            复制成功
+        </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js"></script>
     <script type="text/html" id="uploadItem">
-    <div class="upload-item upload-row" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="[url]">
+    <div class="upload-item upload-row" data-clipboard-text="[url]">
         <div class="upload-col upload-col--medium">[name]
             </div>
         <div class="upload-col upload-col--small">[size]kb</div>
         <div class="upload-col upload-col--large">[url]</div>
-        <div class="upload-col upload-copy upload-col--small" data-clipboard-action="copy" data-clipboard-target="div" data-clipboard-text="[url]">双击复制</div>
+        <div class="upload-col upload-copy upload-col--small" data-clipboard-text="[url]">点击复制</div>
     </div>
     </script>
     <script>
+        appendElement({
+            fileName: 'test',
+            filePath: 'www.google.com',
+            size: 1
+        })
         
         $('#upload').on('change', function () {
             var file = this.files
@@ -79,11 +87,25 @@
         }
 
         // 复制url
-        $('.upload-list').on('click' ,'.upload-item', function () {
-            const copyTxt = $(this).attr('data-clipboard-text')
-            new ClipboardJS(document.querySelectorAll('.upload-item'))
-            new ClipboardJS(document.querySelectorAll('.upload-copy'))
-        })
+        var clipboard = new ClipboardJS('.upload-item');
+        clipboard.on('success', function(e) {
+            // console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            // console.info('Trigger:', e.trigger);
+            $('.upload-copy-msg').animate({top: '16%',opacity: 1,}).delay(1200).animate({top: '-23%',opacity: 0});
+            e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
+
+        // 复制url
+        // $('.upload-list').on('click' ,'.upload-item', function () {
+        //     var copyTxt = $(this).attr('data-clipboard-text')
+        //     new ClipboardJS(document.querySelectorAll('.upload-item'))
+        //     new ClipboardJS(document.querySelectorAll('.upload-copy'))
+        // })
     </script>
 </body>
 </html>
